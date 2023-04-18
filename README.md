@@ -22,6 +22,18 @@
 # Pandas
 To get all data from CSV 
 
+CSV is :
+```
+day	temp	condition
+Monday	12	Sunny
+Tuesday	14	Rain
+Wednesday	15	Rain
+Thursday	14	Cloudy
+Friday	21	Sunny
+Saturday	22	Sunny
+Sunday	24	Sunny
+```
+
  ```Python
  import pandas
  
@@ -59,9 +71,79 @@ print(data_dict)
 To convert data to data list.
 
 ```Python
-data_list = data.to_list()
+data_list = data["temp"].to_list()
 print(data_list)
 
+```
+### Average
+```Python
+data["temp"].mean()
+```
+
+### Max
+
+```Python
+data["temp"].max()
+
+```
+
+## Data Rows
+To get the entire row in pandas.
+
+```Python
+data[data.temp == "Monday"]
+#OR
+data[data["temp"] == "Monday"]
+```
+
+To print the row which has max temperature
+
+```Python
+print(data[data.temp == data.temp.max()])
+```
+
+To print the row specific series(column) data
+
+```Python
+x = data[data.day == "Monday"]
+print(x.condition)
+
+result is sunny.
+```
+
+## Data frames
+To convert data to data frames.
+
+```Python
+data_dict = {
+    "students" = ["Amy", "James", "John"],
+    "age" = [23, 34, 45]
+}
+
+data = pandas.DataFrame(data_dict)
+#print(data)
+data.to_csv("new_file.csv")
+```
+
+## Squirrel color count. 
+Import csv data and export to csv using dataframes
+
+```Python
+import pandas
+
+data = pandas.read_csv("squirrel_data.csv")
+gray_sqi_count = len(data[data["Primary Color"] == "Gray"])
+red_sqi_count = len(data[data["Primary Color"] == "Red"])
+black_sqi_count = len(data[data["Primary Color"] == "Black"])
+
+data_dict = {
+    "color": ["Gray", "Red", "Black"],
+    "count": [gray_sqi_count, red_sqi_count, black_sqi_count]
+}
+
+#To save to another csv
+df = pandas.DataFrame(data_dict)
+df.to_csv("new_file.csv")
 ```
 
 
